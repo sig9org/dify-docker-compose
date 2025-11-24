@@ -14,6 +14,8 @@ sed -i "" -e "s/^LOG_TZ=UTC/LOG_TZ=Asia\/Tokyo/g" .env
 sed -i "" -e "s/^VECTOR_STORE=weaviate/VECTOR_STORE=qdrant/g" .env
 ```
 
+After making changes, perform the following to verify:
+
 ```sh
 grep \
   -e ^LANG= \
