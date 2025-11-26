@@ -25,8 +25,15 @@ grep \
   .env
 ```
 
+## Pull the specified version
+
+```sh
+git clone https://github.com/langgenius/dify.git --branch 1.10.1
+```
+
 ## Dify Releases
 
+- [1.10.1](https://github.com/langgenius/dify/releases/tag/1.10.1) (2025/11/26)
 - [1.10.0](https://github.com/langgenius/dify/releases/tag/1.10.0) (2025/11/13)
 - [1.10.0-rc1](https://github.com/langgenius/dify/releases/tag/1.10.0-rc1) (2025/10/31)
 - [1.9.2](https://github.com/langgenius/dify/releases/tag/1.9.2) (2025/10/29)
