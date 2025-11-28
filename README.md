@@ -5,6 +5,10 @@
 - [GitHub Repository](https://github.com/langgenius/dify⁠)
 - [DockerHub](https://hub.docker.com/r/langgenius/dify-web)
 
+Starting with version 1.10.1, you must pay attention to the permission settings for persistent volumes. For details, please refer to the upgrade guide below:
+
+https://github.com/langgenius/dify/releases/tag/1.10.1
+
 ## Customization
 
 ```sh
