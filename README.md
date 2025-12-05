@@ -2,7 +2,7 @@
 
 - [Official Website](https://dify.ai⁠)
 - [Official Docs](https://docs.dify.ai⁠)
-- [GitHub Repository](https://github.com/langgenius/dify⁠)
+- [GitHub](https://github.com/langgenius/dify) ([Releases](https://github.com/langgenius/dify/releases))
 - [DockerHub](https://hub.docker.com/r/langgenius/dify-web)
 
 ## Upgrade Guide
@@ -27,6 +27,14 @@ chown -R dify:dify ./volumes/app/storage
 
 ## Customization
 
+Copy the configuration file and use [uncmnt]((https://github.com/sig9org/uncmnt)) to remove the comments.
+
+```sh
+uncmnt .env.example > .env
+```
+
+Modify the settings.
+
 ```sh
 sed -i "" -e "s/^LANG=en_US.UTF-8/LANG=ja_JP.UTF-8/g" .env
 sed -i "" -e "s/^LC_ALL=en_US.UTF-8/LC_ALL=ja_JP.UTF-8/g" .env
@@ -34,7 +42,7 @@ sed -i "" -e "s/^LOG_TZ=UTC/LOG_TZ=Asia\/Tokyo/g" .env
 sed -i "" -e "s/^VECTOR_STORE=weaviate/VECTOR_STORE=qdrant/g" .env
 ```
 
-After making changes, perform the following to verify:
+Confirm the changes to the settings.
 
 ```sh
 grep \
