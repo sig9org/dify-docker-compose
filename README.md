@@ -5,9 +5,25 @@
 - [GitHub Repository](https://github.com/langgenius/dify⁠)
 - [DockerHub](https://hub.docker.com/r/langgenius/dify-web)
 
+## Upgrade Guide
+
 Starting with version 1.10.1, you must pay attention to the permission settings for persistent volumes. For details, please refer to the upgrade guide below:
 
-https://github.com/langgenius/dify/releases/tag/1.10.1
+- [v1.10.1 – Multi-Database Era Begins: MySQL Joins the Family](https://github.com/langgenius/dify/releases/tag/1.10.1)
+
+For example, first create a group and user with ID 1001.
+
+```sh
+groupadd -g 1001 dify && \
+useradd dify -u 1001 -g 1001 -s /sbin/nologin
+```
+
+Next, change the owner of the Docker storage.
+
+```sh
+mkdir -p ./volumes/app/storage && \
+chown -R dify:dify ./volumes/app/storage
+```
 
 ## Customization
 
