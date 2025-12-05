@@ -12,10 +12,6 @@ https://github.com/langgenius/dify/releases/tag/1.10.1
 ## Customization
 
 ```sh
-cp .env.example .env
-```
-
-```sh
 sed -i "" -e "s/^LANG=en_US.UTF-8/LANG=ja_JP.UTF-8/g" .env
 sed -i "" -e "s/^LC_ALL=en_US.UTF-8/LC_ALL=ja_JP.UTF-8/g" .env
 sed -i "" -e "s/^LOG_TZ=UTC/LOG_TZ=Asia\/Tokyo/g" .env
