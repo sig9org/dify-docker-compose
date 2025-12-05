@@ -12,6 +12,10 @@ https://github.com/langgenius/dify/releases/tag/1.10.1
 ## Customization
 
 ```sh
+cp .env.example .env
+```
+
+```sh
 sed -i "" -e "s/^LANG=en_US.UTF-8/LANG=ja_JP.UTF-8/g" .env
 sed -i "" -e "s/^LC_ALL=en_US.UTF-8/LC_ALL=ja_JP.UTF-8/g" .env
 sed -i "" -e "s/^LOG_TZ=UTC/LOG_TZ=Asia\/Tokyo/g" .env
@@ -32,11 +36,12 @@ grep \
 ## Pull the specified version
 
 ```sh
-git clone https://github.com/langgenius/dify.git --branch 1.10.1
+git clone https://github.com/langgenius/dify.git --branch 1.10.1-fix.1
 ```
 
 ## Dify Releases
 
+- [1.10.1-fix.1](https://github.com/langgenius/dify/releases/tag/1.10.1) (2025/12/05)
 - [1.10.1](https://github.com/langgenius/dify/releases/tag/1.10.1) (2025/11/26)
 - [1.10.0](https://github.com/langgenius/dify/releases/tag/1.10.0) (2025/11/13)
 - [1.10.0-rc1](https://github.com/langgenius/dify/releases/tag/1.10.0-rc1) (2025/10/31)
