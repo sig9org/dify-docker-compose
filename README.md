@@ -1,15 +1,36 @@
 # Docker Compose for Dify
 
+This repository was created to run tests for Dify. It's set up to easily launch different versions of Dify. The configuration file (.env) has been slightly modified, for example, changing the vector database to [Qdrant](https://qdrant.tech/).
+
 - [Official Website](https://dify.ai⁠)
 - [Official Docs](https://docs.dify.ai⁠)
 - [GitHub](https://github.com/langgenius/dify) ([Releases](https://github.com/langgenius/dify/releases))
 - [DockerHub](https://hub.docker.com/r/langgenius/dify-web)
+
+## How to Use
+
+Navigate to the directory for a specific version and start the Docker container. Modify the configuration file as needed. For example, to use 1.10.1-fix.1, execute the following command:
+
+```sh
+cd versions/1.10.1-fix.1
+docker compose up -d
+```
 
 ## Upgrade Guide
 
 Starting with version 1.10.1, you must pay attention to the permission settings for persistent volumes. For details, please refer to the upgrade guide below:
 
 - [v1.10.1 – Multi-Database Era Begins: MySQL Joins the Family](https://github.com/langgenius/dify/releases/tag/1.10.1)
+
+### Execution Procedure in Script
+
+To execute this via script, run the following in the directory for each version:
+
+```sh
+/bin/bash _change-volume-owner.sh
+```
+
+### Manual Execution Procedure
 
 For example, first create a group and user with ID 1001.
 
@@ -23,6 +44,14 @@ Next, change the owner of the Docker storage.
 ```sh
 mkdir -p ./volumes/app/storage && \
 chown -R dify:dify ./volumes/app/storage
+```
+
+## Pull the specified version
+
+To pull a specific version from Dify's official website, execute the following:
+
+```sh
+git clone https://github.com/langgenius/dify.git --branch 1.10.1-fix.1
 ```
 
 ## Customization
@@ -53,15 +82,9 @@ grep \
   .env
 ```
 
-## Pull the specified version
-
-```sh
-git clone https://github.com/langgenius/dify.git --branch 1.10.1-fix.1
-```
-
 ## Dify Releases
 
-- [1.10.1-fix.1](https://github.com/langgenius/dify/releases/tag/1.10.1) (2025/12/05)
+- [1.10.1-fix.1](https://github.com/langgenius/dify/releases/tag/1.10.1) (2025/12/05) ([React Server Components are Vulnerable to RCE](https://github.com/advisories/GHSA-fv66-9v8q-g76r))
 - [1.10.1](https://github.com/langgenius/dify/releases/tag/1.10.1) (2025/11/26)
 - [1.10.0](https://github.com/langgenius/dify/releases/tag/1.10.0) (2025/11/13)
 - [1.10.0-rc1](https://github.com/langgenius/dify/releases/tag/1.10.0-rc1) (2025/10/31)
