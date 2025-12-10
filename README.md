@@ -12,7 +12,7 @@ This repository was created to run tests for Dify. It's set up to easily launch 
 Navigate to the directory for a specific version and start the Docker container. Modify the configuration file as needed. For example, to use 1.10.1-fix.1, execute the following command:
 
 ```sh
-cd versions/1.10.1-fix.1
+cd versions/1.11.0
 docker compose up -d
 ```
 
@@ -51,7 +51,7 @@ chown -R dify:dify ./volumes/app/storage
 To pull a specific version from Dify's official website, execute the following:
 
 ```sh
-git clone https://github.com/langgenius/dify.git --branch 1.10.1-fix.1
+git clone https://github.com/langgenius/dify.git --branch 1.11.0
 ```
 
 ## Customization
@@ -77,13 +77,14 @@ Confirm the changes to the settings.
 grep \
   -e ^LANG= \
   -e ^LC_ALL= \
-  -e ^LOG_TZ \
+  -e ^LOG_TZ= \
   -e ^VECTOR_STORE= \
   .env
 ```
 
 ## Dify Releases
 
+- [1.11.0](https://github.com/langgenius/dify/releases/tag/1.11.0) (2025/12/10)
 - [1.10.1-fix.1](https://github.com/langgenius/dify/releases/tag/1.10.1) (2025/12/05) ([React Server Components are Vulnerable to RCE](https://github.com/advisories/GHSA-fv66-9v8q-g76r))
 - [1.10.1](https://github.com/langgenius/dify/releases/tag/1.10.1) (2025/11/26)
 - [1.10.0](https://github.com/langgenius/dify/releases/tag/1.10.0) (2025/11/13)
