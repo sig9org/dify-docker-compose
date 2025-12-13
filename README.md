@@ -56,18 +56,20 @@ git clone https://github.com/langgenius/dify.git --branch 1.11.1
 
 ## Customization
 
-Copy the configuration file and use [uncmnt]((https://github.com/sig9org/uncmnt)) to remove the comments.
+Navigate to the working directory.
 
 ```sh
-uncmnt .env.example > .env
+cd versions/1.11.1
 ```
 
-Modify the settings.
+Prepare a script to change the owner of the persistent volume. After that, copy the configuration file while deleting comments using [uncmnt](https://github.com/sig9org/uncmnt), and modify its contents.
 
 ```sh
-sed -i "" -e "s/^LANG=en_US.UTF-8/LANG=ja_JP.UTF-8/g" .env
-sed -i "" -e "s/^LC_ALL=en_US.UTF-8/LC_ALL=ja_JP.UTF-8/g" .env
-sed -i "" -e "s/^LOG_TZ=UTC/LOG_TZ=Asia\/Tokyo/g" .env
+ln -s ../_change-volume-owner.sh _change-volume-owner.sh && \
+uncmnt .env.example > .env && \
+sed -i "" -e "s/^LANG=en_US.UTF-8/LANG=ja_JP.UTF-8/g" .env && \
+sed -i "" -e "s/^LC_ALL=en_US.UTF-8/LC_ALL=ja_JP.UTF-8/g" .env && \
+sed -i "" -e "s/^LOG_TZ=UTC/LOG_TZ=Asia\/Tokyo/g" .env && \
 sed -i "" -e "s/^VECTOR_STORE=weaviate/VECTOR_STORE=qdrant/g" .env
 ```
 
@@ -85,8 +87,11 @@ grep \
 ## Dify Releases
 
 - [1.11.1](https://github.com/langgenius/dify/releases/tag/1.11.1) (2025/12/13)
+    - This version contains very important security updates, and we recommend that all users upgrade to this version as soon as possible.
+    - **React and Next.js Security Upgrades:** We've bumped up `react` and `react-dom` to 19.2.3 to fix some CVE vulnerabilities. Next.js also got a security update, courtesy of [@douxc](https://github.com/douxc) (PRs [#29532](https://github.com/langgenius/dify/pull/29532) and [#29545](https://github.com/langgenius/dify/pull/29545)).
 - [1.11.0](https://github.com/langgenius/dify/releases/tag/1.11.0) (2025/12/10)
-- [1.10.1-fix.1](https://github.com/langgenius/dify/releases/tag/1.10.1) (2025/12/05) ([React Server Components are Vulnerable to RCE](https://github.com/advisories/GHSA-fv66-9v8q-g76r))
+- [1.10.1-fix.1](https://github.com/langgenius/dify/releases/tag/1.10.1) (2025/12/05)
+    - [React Server Components are Vulnerable to RCE](https://github.com/advisories/GHSA-fv66-9v8q-g76r)
 - [1.10.1](https://github.com/langgenius/dify/releases/tag/1.10.1) (2025/11/26)
 - [1.10.0](https://github.com/langgenius/dify/releases/tag/1.10.0) (2025/11/13)
 - [1.10.0-rc1](https://github.com/langgenius/dify/releases/tag/1.10.0-rc1) (2025/10/31)
