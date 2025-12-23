@@ -67,10 +67,11 @@ Prepare a script to change the owner of the persistent volume. After that, copy 
 ```sh
 ln -s ../_change-volume-owner.sh _change-volume-owner.sh && \
 uncmnt .env.example > .env && \
-sed -i "" -e "s/^LANG=en_US.UTF-8/LANG=ja_JP.UTF-8/g" .env && \
-sed -i "" -e "s/^LC_ALL=en_US.UTF-8/LC_ALL=ja_JP.UTF-8/g" .env && \
-sed -i "" -e "s/^LOG_TZ=UTC/LOG_TZ=Asia\/Tokyo/g" .env && \
-sed -i "" -e "s/^VECTOR_STORE=weaviate/VECTOR_STORE=qdrant/g" .env
+sed -i "" -e "s/^LANG=en_US.UTF-8$/LANG=ja_JP.UTF-8/g" .env && \
+sed -i "" -e "s/^LC_ALL=en_US.UTF-8$/LC_ALL=ja_JP.UTF-8/g" .env && \
+sed -i "" -e "s/^LOG_TZ=UTC$/LOG_TZ=Asia\/Tokyo/g" .env && \
+sed -i "" -e "s/^VECTOR_STORE=weaviate$/VECTOR_STORE=qdrant/g" .env && \
+sed -i "" -e "s/^FORCE_VERIFYING_SIGNATURE=true$/FORCE_VERIFYING_SIGNATURE=false/g" .env
 ```
 
 Confirm the changes to the settings.
