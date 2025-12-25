@@ -12,7 +12,7 @@ This repository was created to run tests for Dify. It's set up to easily launch 
 Navigate to the directory for a specific version and start the Docker container. Modify the configuration file as needed. For example, to use 1.10.1-fix.1, execute the following command:
 
 ```sh
-cd versions/1.11.1
+cd versions/1.11.2
 docker compose up -d
 ```
 
@@ -51,7 +51,7 @@ chown -R dify:dify ./volumes/app/storage
 To pull a specific version from Dify's official website, execute the following:
 
 ```sh
-git clone https://github.com/langgenius/dify.git --branch 1.11.1
+git clone https://github.com/langgenius/dify.git --branch 1.11.2
 ```
 
 ## Customization
@@ -59,7 +59,7 @@ git clone https://github.com/langgenius/dify.git --branch 1.11.1
 Navigate to the working directory.
 
 ```sh
-cd versions/1.11.1
+cd versions/1.11.2
 ```
 
 Prepare a script to change the owner of the persistent volume. After that, copy the configuration file while deleting comments using [uncmnt](https://github.com/sig9org/uncmnt), and modify its contents.
@@ -87,6 +87,8 @@ grep \
 
 ## Dify Releases
 
+- [1.11.2](https://github.com/langgenius/dify/releases/tag/1.11.2) (2025/12/25)
+    - Welcome to version 1.11.2! This release sees a significant number of improvements, especially around testing, fixes, and new integrations to enhance the robustness and flexibility of the platform.
 - [1.11.1](https://github.com/langgenius/dify/releases/tag/1.11.1) (2025/12/13)
     - This version contains very important security updates, and we recommend that all users upgrade to this version as soon as possible.
     - **React and Next.js Security Upgrades:** We've bumped up `react` and `react-dom` to 19.2.3 to fix some CVE vulnerabilities. Next.js also got a security update, courtesy of [@douxc](https://github.com/douxc) (PRs [#29532](https://github.com/langgenius/dify/pull/29532) and [#29545](https://github.com/langgenius/dify/pull/29545)).
