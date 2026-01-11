@@ -27,7 +27,11 @@ Starting with version 1.10.1, you must pay attention to the permission settings 
 To execute this via script, run the following in the directory for each version:
 
 ```sh
-/bin/bash _init.sh 10.0.0.1
+/bin/bash _init.sh http://10.0.0.1
+```
+
+```sh
+/bin/bash _init.sh https://10.0.0.1
 ```
 
 This script also sets the following environment variables:
