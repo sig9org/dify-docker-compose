@@ -9,7 +9,7 @@ This repository was created to run tests for Dify. It's set up to easily launch 
 
 ## How to Use
 
-Navigate to the directory for a specific version and start the Docker container. Modify the configuration file as needed. For example, to use 1.10.1-fix.1, execute the following command:
+Navigate to the directory for a specific version and start the Docker container. Modify the configuration file as needed. For example, to use 1.11.2, execute the following command:
 
 ```sh
 cd versions/1.11.2
@@ -27,8 +27,17 @@ Starting with version 1.10.1, you must pay attention to the permission settings 
 To execute this via script, run the following in the directory for each version:
 
 ```sh
-/bin/bash _change-volume-owner.sh
+/bin/bash _init.sh 10.0.0.1
 ```
+
+This script also sets the following environment variables:
+
+1. CONSOLE_API_URL
+2. CONSOLE_WEB_URL
+3. SERVICE_API_URL
+4. PP_API_URL
+5. APP_WEB_URL
+6. FILES_URL
 
 ### Manual Execution Procedure
 

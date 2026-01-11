@@ -1,1 +1,0 @@
-../_change-volume-owner.sh
