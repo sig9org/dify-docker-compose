@@ -12,7 +12,7 @@ This repository was created to run tests for Dify. It's set up to easily launch 
 Navigate to the directory for a specific version and start the Docker container. Modify the configuration file as needed. For example, to use 1.11.2, execute the following command:
 
 ```sh
-cd versions/1.11.2
+cd versions/1.11.3
 docker compose up -d
 ```
 
@@ -64,7 +64,7 @@ chown -R dify:dify ./volumes/app/storage
 To pull a specific version from Dify's official website, execute the following:
 
 ```sh
-git clone https://github.com/langgenius/dify.git --branch 1.11.2
+git clone https://github.com/langgenius/dify.git --branch 1.11.3
 ```
 
 ## Customization
@@ -72,7 +72,7 @@ git clone https://github.com/langgenius/dify.git --branch 1.11.2
 Navigate to the working directory.
 
 ```sh
-cd versions/1.11.2
+cd versions/1.11.3
 ```
 
 Prepare a script to change the owner of the persistent volume. After that, copy the configuration file while deleting comments using [uncmnt](https://github.com/sig9org/uncmnt), and modify its contents.
@@ -100,6 +100,8 @@ grep \
 
 ## Dify Releases
 
+- [1.11.3](https://github.com/langgenius/dify/releases/tag/1.11.3) (2026/01/13)
+    - Our latest release, v1.11.3, brings to you a slew of bug fixes and features focused on performance, functionality, and user experience.
 - [1.11.2](https://github.com/langgenius/dify/releases/tag/1.11.2) (2025/12/25)
     - Welcome to version 1.11.2! This release sees a significant number of improvements, especially around testing, fixes, and new integrations to enhance the robustness and flexibility of the platform.
 - [1.11.1](https://github.com/langgenius/dify/releases/tag/1.11.1) (2025/12/13)
