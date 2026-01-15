@@ -9,10 +9,10 @@ This repository was created to run tests for Dify. It's set up to easily launch 
 
 ## How to Use
 
-Navigate to the directory for a specific version and start the Docker container. Modify the configuration file as needed. For example, to use 1.11.2, execute the following command:
+Navigate to the directory for a specific version and start the Docker container. Modify the configuration file as needed. For example, execute the following command:
 
 ```sh
-cd versions/1.11.3
+cd versions/1.11.4
 docker compose up -d
 ```
 
@@ -64,7 +64,7 @@ chown -R dify:dify ./volumes/app/storage
 To pull a specific version from Dify's official website, execute the following:
 
 ```sh
-git clone https://github.com/langgenius/dify.git --branch 1.11.3
+git clone https://github.com/langgenius/dify.git --branch 1.11.4
 ```
 
 ## Customization
@@ -72,13 +72,13 @@ git clone https://github.com/langgenius/dify.git --branch 1.11.3
 Navigate to the working directory.
 
 ```sh
-cd versions/1.11.3
+cd versions/1.11.4
 ```
 
 Prepare a script to change the owner of the persistent volume. After that, copy the configuration file while deleting comments using [uncmnt](https://github.com/sig9org/uncmnt), and modify its contents.
 
 ```sh
-ln -s ../_change-volume-owner.sh _change-volume-owner.sh && \
+ln -s ../../_init.sh _init.sh && \
 uncmnt .env.example > .env && \
 sed -i "" -e "s/^LANG=en_US.UTF-8$/LANG=ja_JP.UTF-8/g" .env && \
 sed -i "" -e "s/^LC_ALL=en_US.UTF-8$/LC_ALL=ja_JP.UTF-8/g" .env && \
@@ -100,6 +100,8 @@ grep \
 
 ## Dify Releases
 
+- [1.11.4](https://github.com/langgenius/dify/releases/tag/1.11.4) (2026/01/15)
+    - Dify now requires Node.js 24.13.0 to pick up the upstream fix for the AsyncLocalStorage/async_hooks DoS CVE that can crash apps with deeply nested input. All self-hosted deployments should upgrade Node.js. Thanks to @hyoban in [#30945](https://github.com/langgenius/dify/pull/30945).
 - [1.11.3](https://github.com/langgenius/dify/releases/tag/1.11.3) (2026/01/13)
     - Our latest release, v1.11.3, brings to you a slew of bug fixes and features focused on performance, functionality, and user experience.
 - [1.11.2](https://github.com/langgenius/dify/releases/tag/1.11.2) (2025/12/25)
