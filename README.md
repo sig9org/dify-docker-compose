@@ -12,7 +12,7 @@ This repository was created to run tests for Dify. It's set up to easily launch 
 Navigate to the directory for a specific version and start the Docker container. Modify the configuration file as needed. For example, execute the following command:
 
 ```sh
-cd versions/1.11.4
+cd versions/1.12.0
 docker compose up -d
 ```
 
@@ -64,7 +64,7 @@ chown -R dify:dify ./volumes/app/storage
 To pull a specific version from Dify's official website, execute the following:
 
 ```sh
-git clone https://github.com/langgenius/dify.git --branch 1.11.4
+git clone https://github.com/langgenius/dify.git --branch 1.12.0
 ```
 
 ## Customization
@@ -72,7 +72,7 @@ git clone https://github.com/langgenius/dify.git --branch 1.11.4
 Navigate to the working directory.
 
 ```sh
-cd versions/1.11.4
+cd versions/1.12.0
 ```
 
 Prepare a script to change the owner of the persistent volume. After that, copy the configuration file while deleting comments using [uncmnt](https://github.com/sig9org/uncmnt), and modify its contents.
@@ -100,6 +100,9 @@ grep \
 
 ## Dify Releases
 
+- [1.12.0](https://github.com/langgenius/dify/releases/tag/1.12.0) (2026/02/03)
+    - We are introducing Summary Index, a powerful enhancement to our knowledge base retrieval system that significantly improves search accuracy by generating AI-powered summaries for document chunks.
+    - Traditional vector search relies on raw chunk embeddings, which can miss semantic nuances and context when matching user queries. This is especially challenging for long documents or complex content where key information might be scattered across multiple chunks. Summary Index addresses this by creating concise, semantically-rich summaries for each document chunk, which are then vectorized and used as an additional retrieval layer.
 - [1.11.4](https://github.com/langgenius/dify/releases/tag/1.11.4) (2026/01/15)
     - Dify now requires Node.js 24.13.0 to pick up the upstream fix for the AsyncLocalStorage/async_hooks DoS CVE that can crash apps with deeply nested input. All self-hosted deployments should upgrade Node.js. Thanks to @hyoban in [#30945](https://github.com/langgenius/dify/pull/30945).
 - [1.11.3](https://github.com/langgenius/dify/releases/tag/1.11.3) (2026/01/13)
