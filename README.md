@@ -12,7 +12,7 @@ This repository was created to run tests for Dify. It's set up to easily launch 
 Navigate to the directory for a specific version and start the Docker container. Modify the configuration file as needed. For example, execute the following command:
 
 ```sh
-cd versions/1.13.0
+cd versions/1.13.2
 docker compose up -d
 ```
 
@@ -64,7 +64,7 @@ chown -R dify:dify ./volumes/app/storage
 To pull a specific version from Dify's official website, execute the following:
 
 ```sh
-git clone https://github.com/langgenius/dify.git --branch 1.13.0
+git clone https://github.com/langgenius/dify.git --branch 1.13.2
 ```
 
 ## Customization
@@ -72,7 +72,7 @@ git clone https://github.com/langgenius/dify.git --branch 1.13.0
 Navigate to the working directory.
 
 ```sh
-cd versions/1.13.0
+cd versions/1.13.2
 ```
 
 Prepare a script to change the owner of the persistent volume. After that, copy the configuration file while deleting comments using [uncmnt](https://github.com/sig9org/uncmnt), and modify its contents.
@@ -101,6 +101,13 @@ grep \
 
 ## Dify Releases
 
+- [1.13.2](https://github.com/langgenius/dify/releases/tag/1.13.2) (2026/03/18)
+    - This patch release fixes several critical regressions and stability issues introduced in v1.13.1, including:
+        - a severe regression in prompt message transformation that caused multiple LLM-plugin invocation failures across LLM-related nodes, including LLM and Question Classifier.
+        - Knowledge Retrieval node execution failures caused by incompatible enum values
+        - improper Weaviate client cleanup
+- [1.13.1](https://github.com/langgenius/dify/releases/tag/1.13.1) (2026/03/17)
+- [1.14.0-rc1](https://github.com/langgenius/dify/releases/tag/1.14.0-rc1) (2026/02/14)
 - [1.13.0](https://github.com/langgenius/dify/releases/tag/1.13.0) (2026/02/11)
     - We are introducing the Human Input node, a major update that transforms how AI and humans collaborate within Dify workflows.
 - [1.12.1](https://github.com/langgenius/dify/releases/tag/1.12.1) (2026/02/04)
