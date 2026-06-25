@@ -12,7 +12,7 @@ This repository was created to run tests for Dify. It's set up to easily launch 
 Navigate to the directory for a specific version and start the Docker container. Modify the configuration file as needed. For example, execute the following command:
 
 ```sh
-cd versions/1.14.2
+cd versions/1.15.0
 docker compose up -d
 ```
 
@@ -64,7 +64,7 @@ chown -R dify:dify ./volumes/app/storage
 To pull a specific version from Dify's official website, execute the following:
 
 ```sh
-git clone https://github.com/langgenius/dify.git --branch 1.14.2
+git clone https://github.com/langgenius/dify.git --branch 1.15.0
 ```
 
 ## Customization
@@ -72,7 +72,7 @@ git clone https://github.com/langgenius/dify.git --branch 1.14.2
 Navigate to the working directory.
 
 ```sh
-cd versions/1.14.2
+cd versions/1.15.0
 ```
 
 Prepare a script to change the owner of the persistent volume. After that, copy the configuration file while deleting comments using [uncmnt](https://github.com/sig9org/uncmnt), and modify its contents.
@@ -101,6 +101,7 @@ grep \
 
 ## Dify Releases
 
+- [1.15.0](https://github.com/langgenius/dify/releases/tag/1.15.0) (2026/06/25)
 - [1.14.2](https://github.com/langgenius/dify/releases/tag/1.14.2) (2026/05/19)
     - v1.14.2 is a patch release focused on security hardening, workflow and knowledge reliability, observability fixes, agent groundwork, and deployment/runtime tuning after v1.14.1.
 - [1.14.1](https://github.com/langgenius/dify/releases/tag/1.14.1) (2026/05/12)
