@@ -2,21 +2,77 @@
 
 version: '3'
 
+dotenv:
+  - '.env'
+  - 'project.ini'
+
 silent: true
 
 vars:
-  DIFY_VERSION: 1.16.0
+  CLEANUP_DIRS:
+    - .idea
+    - .terraform
+    - .vscode
+  CLEANUP_FILES:
+    - .DS_Store
+    - .terraform.lock.hcl
+    - terraform.tfstate
+    - terraform.tfstate.backup
+    - Desktop.ini
+    - Thumbs.db
+  DIFY_VERSION: 1.17.0
+  START_TIME: '{{now.UnixMilli}}'
 
 tasks:
   default:
     cmds:
       - task --list
 
+  cleanup:
+    aliases: [c]
+    desc: 'Cleanup unnecessary files'
+    cmds:
+      - defer:
+          task: time
+          vars:
+            START_TIME: '{{.START_TIME}}'
+      - task: cleanup:shell
+      - task: cleanup:win
+
+  cleanup:shell:
+    internal: true
+    dir: '{{.USER_WORKING_DIR}}'
+    platforms: [darwin, linux]
+    cmds:
+      - for: { var: CLEANUP_DIRS }
+        cmd: find . -type d -name "{{.ITEM}}" -print -prune -exec rm -rf {} + | sed 's/^/[DELETE]/'
+      - for: { var: CLEANUP_FILES }
+        cmd: find . -name "{{.ITEM}}" -print -delete | sed 's/^/[DELETE]/'
+
+  cleanup:win:
+    internal: true
+    dir: '{{.USER_WORKING_DIR}}'
+    platforms: [windows]
+    cmds:
+      - for: { var: CLEANUP_DIRS }
+        cmd: powershell -NoProfile -Command "Get-ChildItem -Path . -Recurse -Directory -Force -ErrorAction SilentlyContinue | Where-Object { $_.Name -eq '{{.ITEM}}' } | Sort-Object FullName -Descending | ForEach-Object { Write-Output ('[DELETE]' + $_.FullName); Remove-Item -LiteralPath $_.FullName -Recurse -Force }"
+      - for: { var: CLEANUP_FILES }
+        cmd: powershell -NoProfile -Command "Get-ChildItem -Path . -Recurse -File -Force -ErrorAction SilentlyContinue | Where-Object { $_.Name -eq '{{.ITEM}}' } | ForEach-Object { Write-Output ('[DELETE]' + $_.FullName); Remove-Item -LiteralPath $_.FullName -Force }"
+
   init:
     aliases: [i]
     desc: Init
     dir: '{{.USER_WORKING_DIR}}/versions/{{.DIFY_VERSION}}'
     cmds:
+      - defer:
+          task: time
+          vars:
+            START_TIME: '{{.START_TIME}}'
+      - defer:
+          task: notify
+          vars:
+            NOTIFY_TITLE: 'Init Dify v{{.DIFY_VERSION}}'
+            NOTIFY_BODY: 'Done.'
       - pwd
       - ln -s ../../_init.sh _init.sh
       - uncmnt .env.example > .env
@@ -25,3 +81,48 @@ tasks:
       - sed -i "" -e "s/^LOG_TZ=UTC$/LOG_TZ=Asia\/Tokyo/g" .env
       - sed -i "" -e "s/^VECTOR_STORE=weaviate$/VECTOR_STORE=qdrant/g" .env
       - sed -i "" -e "s/^FORCE_VERIFYING_SIGNATURE=true$/FORCE_VERIFYING_SIGNATURE=false/g" .env
+
+  notify:
+    internal: true
+    cmds:
+      - task: notify:mac
+        vars:
+          NOTIFY_TITLE: '{{.NOTIFY_TITLE}}'
+          NOTIFY_BODY: '{{.NOTIFY_BODY}}'
+      - task: notify:win
+        vars:
+          NOTIFY_TITLE: '{{.NOTIFY_TITLE}}'
+          NOTIFY_BODY: '{{.NOTIFY_BODY}}'
+
+  notify:mac:
+    internal: true
+    platforms: [darwin]
+    cmds:
+      - osascript -e 'display notification "{{.NOTIFY_BODY}}" with title "{{.NOTIFY_TITLE}}"'
+      - /bin/sh -c 'nohup /usr/bin/afplay /System/Library/Sounds/Glass.aiff >/dev/null 2>&1 < /dev/null &'
+
+  notify:win:
+    internal: true
+    platforms: [windows]
+    cmds:
+      - powershell -NoProfile -Command "[System.Media.SystemSounds]::Beep.Play(); $notify = New-Object System.Windows.Forms.NotifyIcon; $notify.Icon = [System.Drawing.SystemIcons]::Information; $notify.BalloonTipTitle = '{{.NOTIFY_TITLE}}'; $notify.BalloonTipText = '{{.NOTIFY_BODY}}'; $notify.Visible = $true; $notify.ShowBalloonTip(5000); Start-Sleep -Seconds 5; $notify.Dispose()"
+
+  time:
+    internal: true
+    vars:
+      END_TIME: '{{now.UnixMilli}}'
+    cmds:
+      - |
+        ELAPSED_MS=$(({{.END_TIME}} - {{.START_TIME}}))
+        MINUTES=$((ELAPSED_MS / 60000))
+        SECONDS=$((ELAPSED_MS % 60000 / 1000))
+        MILLIS=$((ELAPSED_MS % 1000))
+        GREEN='\033[0;32m'
+        RESET='\033[0m'
+        if [ "$MINUTES" -gt 0 ]; then
+          printf '%b======================================== Elapsed: %s min %s sec %s msec%b\n' "$GREEN" "$MINUTES" "$SECONDS" "$MILLIS" "$RESET"
+        elif [ "$SECONDS" -gt 0 ]; then
+          printf '%b======================================== Elapsed: %s sec %s msec%b\n' "$GREEN" "$SECONDS" "$MILLIS" "$RESET"
+        else
+          printf '%b======================================== Elapsed: %s msec%b\n' "$GREEN" "$MILLIS" "$RESET"
+        fi
